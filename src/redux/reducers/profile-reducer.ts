@@ -1,5 +1,4 @@
-const initialState = null
-
+const initialState = {}
 // actionCreators
 export const profileAC = () => ({});
 

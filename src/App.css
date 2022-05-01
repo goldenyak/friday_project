@@ -1,5 +1,20 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background: linear-gradient(180deg, #D8D4E6 0%, #9890C7 100%) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .App {
   text-align: center;
+
+
 }
 
 .App-logo {

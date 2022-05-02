@@ -1,0 +1,139 @@
+.loginBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 413px;
+  padding: 25px 33px;
+  transform: translate(-50%, -50%);
+  background: #F9F9FE;
+  box-sizing: border-box;
+  border-radius: 8px;
+
+}
+
+
+/* It-incubator */
+.loginBox h1 {
+  color: #2D2E46;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* It-sign-Up */
+.loginBox h2 {
+  font-family: 'Poppins', sans-serif;
+  margin-top: 50px;
+  color: #2D2E46;
+  text-align: center;
+}
+
+.loginBox h3 {
+  margin-top: 31px;
+  color: grey;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.loginBox h4 {
+  margin-top: 25px;
+  color: #21268F;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.loginBox h4:hover {
+  opacity: 0.8;
+}
+
+.loginBox h3:hover {
+  opacity: 0.8;
+}
+
+.loginBox .userBox {
+  position: relative;
+  height: 70px;
+  margin: 24px auto 0;
+}
+
+.loginBox .userBox input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #2D2E46;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 1px solid #2D2E46;
+  outline: none;
+  background: transparent;
+}
+
+.loginBox .userBox img {
+  position: absolute;
+  right: 5%;
+  bottom: 60%;
+}
+
+.loginBox .userBox label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #2D2E46;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.loginBox .userBox input:focus ~ label,
+.loginBox .userBox input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: grey;
+  font-size: 12px;
+}
+
+.loginBox a {
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  width: 124px;
+  height: 36px;
+  padding: 5px;
+  color: #21268F;
+  background-color: #D7D8EF;
+  border-radius: 30px;
+}
+
+
+.loginBox .buttonBlock{
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 0;
+}
+
+
+
+.loginBox .submitButton{
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  border: none;
+  width: 187px;
+  height: 36px;
+  background: #21268F;
+  border-radius: 30px;
+  color: #ECECF9;
+}
+
+.loginBox .errorMessage{
+  color: red;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}

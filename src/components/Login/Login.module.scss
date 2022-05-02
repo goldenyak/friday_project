@@ -1,0 +1,114 @@
+.loginBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 413px;
+  padding: 25px 33px;
+  transform: translate(-50%, -50%);
+  background: #F9F9FE;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.loginBox h1 {
+  font-family: 'Poppins', sans-serif;
+  color: #2D2E46;
+  text-align: center;
+}
+
+.loginBox h2 {
+  font-family: 'Poppins', sans-serif;
+  margin-top: 50px;
+  color: #2D2E46;
+  text-align: center;
+}
+
+.loginBox h3 {
+  margin-top: 31px;
+  color: grey;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.loginBox h4 {
+  margin-top: 25px;
+  color: #21268F;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.loginBox h4:hover {
+  opacity: 0.8;
+}
+
+.loginBox h3:hover {
+  opacity: 0.8;
+}
+
+.loginBox .userBox {
+  position: relative;
+  height: 70px;
+  margin: 24px auto 0;
+}
+
+.loginBox .userBox input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #2D2E46;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 1px solid #2D2E46;
+  outline: none;
+  background: transparent;
+}
+
+.loginBox .userBox img {
+  position: absolute;
+  right: 5%;
+  bottom: 60%;
+}
+
+.loginBox .userBox label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #2D2E46;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.loginBox .userBox input:focus ~ label,
+.loginBox .userBox input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: grey;
+  font-size: 12px;
+}
+
+.loginBox {
+  button {
+    display: block;
+    margin: 79px auto 0;
+    background-color: #21268F;
+    color: #ECECF9;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    font-size: 16px;
+    padding: 9px 113px;
+    cursor: pointer;
+
+  }
+}
+
+.loginBox .errorMessage{
+  color: red;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+

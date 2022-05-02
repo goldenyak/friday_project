@@ -1,9 +1,11 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {actionTypeRegistrationReducer, registerReducer} from "../components/Register/registerReducer";
+import {actionTypeRegistrationReducer, registerReducer} from "./register-reducer";
 import thunkMiddleware, { ThunkAction } from 'redux-thunk'
+import {loginReducer} from "./login-reducer";
 
 const rootReducer  = combineReducers( {
-    register: registerReducer
+    register: registerReducer,
+    login: loginReducer,
 })
 
 

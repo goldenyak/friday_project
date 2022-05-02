@@ -1,7 +1,7 @@
-import {authAPI, RESPONSE_TYPE, ResponseError} from "../../api/api";
+import {authAPI, RESPONSE_TYPE, ResponseError} from "../api/api";
 import {AxiosError} from "axios";
-import {AppDispatch} from "../../store/store";
-import {registerValueTypes} from "./Register";
+import {AppDispatch} from "./store";
+import {registerValueTypes} from "../components/Register/Register";
 
 
 const initialState = {

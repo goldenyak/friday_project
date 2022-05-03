@@ -1,4 +1,3 @@
-import {Dispatch} from "react";
 import {authAPI} from "../api/api";
 
 

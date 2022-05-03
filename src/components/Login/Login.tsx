@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Navigate} from 'react-router-dom';
 import l from "./Login.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
-import {AppRootStateType} from "../../redux/store";
-import {loginTC} from "../../redux/login-reducer";
+import {AppRootStateType} from "../../store/store";
+import {loginTC} from "../../store/login-reducer";
+import showPasswordIcon from "../../common/icons/showPasswordIcon.png";
 
 
 type FormikErrorType = {
@@ -40,15 +41,18 @@ export const Login = () => {
             return errors;
         },
         onSubmit: params => {
-            console.log(params)
-            // alert(JSON.stringify(params));
-            // @ts-ignore
-            dispatch(loginTC(params))
+            dispatch(loginTC(params) as any)
             formik.resetForm()
         },
     })
 
-    if(isLoggedIn) {
+    const[showPassword, setShowPassword] = useState<boolean>(false)
+
+    const onShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
+
+    if (isLoggedIn) {
         return <Navigate to='/profile'/>
     }
 
@@ -62,24 +66,24 @@ export const Login = () => {
                            {...formik.getFieldProps('email')}
                     />
                     {formik.touched.email && formik.errors.email ? (
-                        <div style={{color: "red"}}>{formik.errors.email}</div>) : null}
+                        <div className={l.errorMessage}>{formik.errors.email}</div>) : null}
                     <label>Username</label>
                 </div>
                 <div className={l.userBox}>
-                    <input type='password' required={true}
+                    <input type={showPassword ? "text" : "password"} required={true}
                            {...formik.getFieldProps('password')}
                     />
+                    <img alt={'showPasswordIcon'} onClick={onShowPassword} src={showPasswordIcon}/>
                     {formik.touched.password && formik.errors.password ? (
-                        <div style={{color: "red"}}>{formik.errors.password}</div>) : null}
+                        <div className={l.errorMessage}>{formik.errors.password}</div>) : null}
                     <label>Password</label>
                 </div>
                 <button type='submit'>
                     Login
                 </button>
                 <h3>Don’t have an account?</h3>
-                <h4>Sign Up</h4>
+                <a href={'/register'}><h4>Sign Up</h4></a>
             </form>
         </div>
     )
-
-};
+}

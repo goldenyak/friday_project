@@ -6,7 +6,6 @@ import {Register} from './components/Register/Register';
 
 function App() {
     return (
-<<<<<<<<< Temporary merge branch 1
         <div className='App'>
             Стартовая страница
             <Routes>
@@ -14,14 +13,6 @@ function App() {
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/profile' element={<Profile/>}/>
             </Routes>
-=========
-        <div>
-                <Routes>
-                    <Route path="/login" element={<Login/>}/>
-                    <Route path='/register' element={<Register/>}/>
-                    <Route path='/profile' element={<Profile/>}/>
-                </Routes>
->>>>>>>>> Temporary merge branch 2
         </div>
     );
 }

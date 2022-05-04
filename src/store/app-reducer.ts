@@ -1,11 +1,12 @@
 import {Dispatch} from "redux";
 import {authAPI, ResponseError} from "../api/api";
 import {AxiosError} from "axios";
+import {isLoggedInAC, setUserData} from "./login-reducer";
 
 const initialState = {
-    status: 'idle',
+    status: 'loading',
     error: null,
-    isInitialized:true
+    isInitialized:false
 }
 
 type InitialStateType = {
@@ -32,13 +33,17 @@ export const appReducer = (state: InitialStateType = initialState, action:appRed
 
 //thunk
 export const initializeAppTC = () => (dispatch:Dispatch) => {
-    authAPI.getProfile().then(() => {
-        // dispatch(setIsLoggedInAC(true))
+    authAPI.getProfile().then((resolve) => {
+        dispatch(setAppStatus('idle'))
+        dispatch(setIsInitializedAC(true))
+        dispatch(setUserData(true, resolve.data.email, resolve.data.name))
     }).catch((error:AxiosError<ResponseError>) => {
+        console.log(error)
+        dispatch(setIsInitializedAC(false))
         dispatch(setAppErrorAC(error.response?.data ? error.response.data.error: error.message))
 
     }).finally(() => {
-        dispatch(setIsInitializedAC(true))
+        dispatch(setAppStatus('succeeded'))
 
     })
 

@@ -1,4 +1,5 @@
 import {authAPI} from "../api/api";
+import {AppDispatch} from "./store";
 import {Dispatch} from "redux";
 
 
@@ -19,6 +20,8 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
     switch (action.type) {
         case 'login/SET-USER-DATA':
             return {...state, ...action.payload }
+        case 'login/IS-LOGGED-IN':
+            return {...state, isLoggedIn: action.isLoggedIn }
         default:
             return state
     }
@@ -26,24 +29,31 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
 
 // actions
 export const setUserData = (isLoggedIn:boolean, email:string, name:string) => (
-        {type: 'login/SET-USER-DATA',
+    {type: 'login/SET-USER-DATA',
         payload: {isLoggedIn, email, name}
     } as const)
-// export const setUserDataAC = (value: ) => ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+
+export const isLoggedInAC = (isLoggedIn:boolean) => (
+    {type: 'login/IS-LOGGED-IN', isLoggedIn
+    } as const)
+
 
 // thunks
-export const loginTC = (loginData: LoginParamsType) => (dispatch: Dispatch) => {
-    authAPI.login(loginData)
-        .then( (res) => {
-            console.log(res.data)
-            let {email, name} = res.data
-            dispatch(setUserData(true, email, name));
-        })
+export const loginTC = (loginData: LoginParamsType) => {
+    return   (dispatch: Dispatch) => {
+        authAPI.login(loginData)
+            .then( (res) => {
+                let {email, name} = res.data
+                dispatch(setUserData(true, email, name));
+            })
+    }
 }
+
 
 
 // types
 type ActionsType = ReturnType<typeof setUserData>
+    | ReturnType<typeof isLoggedInAC>
 
 
 

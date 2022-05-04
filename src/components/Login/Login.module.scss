@@ -2,7 +2,7 @@
 
 .loginBox {
   @include container();
-  min-height: 631px;
+  min-height: 660px;
 }
 
 .loginBox h1 {
@@ -63,10 +63,11 @@
 .loginBox .userBox img {
   position: absolute;
   right: 5%;
-  bottom: 60%;
+  bottom: 50%;
 }
 
 .loginBox .userBox label {
+  font-family: 'Poppins', sans-serif;
   position: absolute;
   top:0;
   left: 0;
@@ -102,6 +103,7 @@
 }
 
 .rememberBox{
+  margin-top: 20px;
   align-items: center;
   display: flex;
   justify-content: left;

@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {authAPI, ResponseError} from "../api/api";
 import {AxiosError} from "axios";
-import {isLoggedInAC, setUserData} from "./login-reducer";
+import {setUserData} from "./login-reducer";
 
 const initialState = {
     status: 'loading',

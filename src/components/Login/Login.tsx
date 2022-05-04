@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {AppRootStateType} from "../../store/store";
 import {loginTC} from "../../store/login-reducer";
-import showPasswordIcon from "../../common/icons/showPasswordIcon.png";
+import showPasswordIcon from "../../common/icons/eye.svg";
 import Preloader from "../../common/preloader/Preloader";
 
 
@@ -25,6 +25,8 @@ export const Login = () => {
 
     const formik = useFormik({
         initialValues: {
+            // email: '',
+            // password: '',
             email: 'sasads1a@mail.ru',
             password: 'sdas3r2135dfsad',
             rememberMe: false
@@ -38,10 +40,9 @@ export const Login = () => {
                 errors.email = 'Invalid email address';
             }
             if (!values.password) {
-                errors.password = 'Required';
-            } else if (values.password.length < 2) {
-                errors.password = 'Пароль должен быть не менее 2 символов';
+                errors.password = 'Required password';
             }
+
             return errors;
         },
         onSubmit: loginData => {
@@ -51,6 +52,8 @@ export const Login = () => {
     })
 
     const[showPassword, setShowPassword] = useState<boolean>(false)
+
+    const showIconStyle = showPassword? '' : ''
 
     const onShowPassword = () => {
         setShowPassword(!showPassword)
@@ -65,23 +68,27 @@ export const Login = () => {
             <h1>It-incubator</h1>
             <h2>Sign In</h2>
             <form onSubmit={formik.handleSubmit}>
+
                 <div className={l.userBox}>
-                    <input required={true}
-                           {...formik.getFieldProps('email')}
-                    />
-                    {formik.touched.email && formik.errors.email ? (
-                        <div className={l.errorMessage}>{formik.errors.email}</div>) : null}
+                    <input required={true}{...formik.getFieldProps('email')}/>
+                    {formik.touched.email && formik.errors.email ?
+                        <div className={l.errorMessage}>{formik.errors.email}</div> : null}
                     <label>Username</label>
                 </div>
+
                 <div className={l.userBox}>
-                    <input type={showPassword ? "text" : "password"} required={true}
-                           {...formik.getFieldProps('password')}
-                    />
-                    <img alt={'showPasswordIcon'} onClick={onShowPassword} src={showPasswordIcon}/>
+                    <input required={true} type={showPassword ? "text" : "password"}
+                           {...formik.getFieldProps('password')}/>
+                    <img alt={'showPasswordIcon'} onClick={onShowPassword}
+                         src={showPasswordIcon}/>
                     {formik.touched.password && formik.errors.password ? (
                         <div className={l.errorMessage}>{formik.errors.password}</div>) : null}
                     <label>Password</label>
                 </div>
+
+
+
+
                 <div className={l.rememberBox}>
                     <input type={'checkbox'}
                            {...formik.getFieldProps('rememberMe')}

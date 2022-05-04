@@ -6,7 +6,7 @@ import {useFormik} from "formik";
 import {AppDispatch, AppRootStateType} from "../../store/store";
 import {registerTC} from "../../store/register-reducer";
 import Preloader from "../../common/preloader/Preloader";
-import showPasswordIcon from "../../common/icons/showPasswordIcon.png";
+import showPasswordIcon from "../../common/icons/eye.svg";
 
 
 export type registerValueType = {

@@ -8,13 +8,15 @@ type InitialStateType = {
     email:string
     name: string
     error:string | null
+    isFetching: boolean
 }
 
 const initialState: InitialStateType = {
     isLoggedIn: false,
     email: '',
     name:'',
-    error: null
+    error: null,
+    isFetching:true
 
 }
 // reducers
@@ -26,6 +28,8 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
             return {...state, isLoggedIn: action.isLoggedIn }
         case 'login/ERROR-MESSAGE':
             return {...state, error: action.message}
+        case "login/SET-ISFETCHING":
+            return {...state, isFetching: action.fetching}
         default:
             return state
     }
@@ -44,19 +48,25 @@ export const isLoggedInAC = (isLoggedIn:boolean) => (
     } as const)
 
 export const errorLoginMessage = (message:string) => {return {type: 'login/ERROR-MESSAGE', message} as const}
+export const isFetchingStatus = (fetching:boolean) => {return {type: 'login/SET-ISFETCHING', fetching} as const}
 
 
 
 // thunks
 export const loginTC = (loginData: LoginParamsType) => {
     return   (dispatch: Dispatch) => {
+        dispatch(isFetchingStatus(false))
         authAPI.login(loginData)
             .then( (res) => {
                 let {email, name} = res.data
                 dispatch(setUserData(true, email, name));
             }).catch((error:AxiosError<ResponseError>) => {
             dispatch(errorLoginMessage(error.response?.data ? error.response.data.error: error.message))
-        })
+        }).finally( () => {
+            dispatch(isFetchingStatus(true))
+            }
+
+        )
     }
 }
 
@@ -66,6 +76,7 @@ export const loginTC = (loginData: LoginParamsType) => {
 type ActionsType = ReturnType<typeof setUserData>
     | ReturnType<typeof isLoggedInAC>
     | ReturnType<typeof errorLoginMessage>
+    | ReturnType<typeof isFetchingStatus>
 
 
 export type LoginParamsType = {

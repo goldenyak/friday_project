@@ -6,6 +6,7 @@ import {useFormik} from "formik";
 import {AppRootStateType} from "../../store/store";
 import {loginTC} from "../../store/login-reducer";
 import showPasswordIcon from "../../common/icons/showPasswordIcon.png";
+import Preloader from "../../common/preloader/Preloader";
 
 
 type FormikErrorType = {
@@ -18,6 +19,7 @@ export const Login = () => {
 
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const errorMessage = useSelector<AppRootStateType, string | null>(state => state.login.error)
+    const isFetchingStatus = useSelector<AppRootStateType, boolean>(state => state.login.isFetching)
 
     const dispatch = useDispatch();
 
@@ -87,15 +89,19 @@ export const Login = () => {
                     <label> Remember Me</label>
                 </div>
 
-                <div>
-                <div className={l.errorBox}>
-                    {errorMessage && <div className={l.errorMessage}>{errorMessage}</div>}
-                </div>
-                <button type='submit'>Login</button>
 
-                <h3>Don’t have an account?</h3>
-                <a href={'/register'}><h4>Sign Up</h4></a>
-                </div>
+                {isFetchingStatus ? <div className={l.loginButtonBox}>
+                        <div className={l.errorBox}>
+                            {errorMessage && <div className={l.errorMessage}>{errorMessage}</div>}
+                        </div>
+                        <button type='submit'>Login</button>
+
+                        <h3>Don’t have an account?</h3>
+                        <a href={'/register'}><h4>Sign Up</h4></a>
+                    </div>
+                    :
+
+                    <div className={l.preloaderBox}> <Preloader/></div>}
             </form>
         </div>
     )

@@ -1,7 +1,8 @@
 @import "src/common/styles/mixims";
 
 .loginBox {
-  @include container()
+  @include container();
+  min-height: 631px;
 }
 
 .loginBox h1 {
@@ -124,6 +125,19 @@
   height: 50px;
   padding: 20px 0;
 }
+
+
+  .preloaderBox{
+    display: flex;
+    height: 225px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .loginButtonBox{
+    height: 225px;
+  }
+
 
 
 .loginBox .errorMessage{

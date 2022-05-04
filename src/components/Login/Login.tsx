@@ -26,6 +26,7 @@ export const Login = () => {
             password: 'sdas3r2135dfsad',
             rememberMe: false
         },
+
         validate: (values) => {
             const errors: FormikErrorType = {};
             if (!values.email) {
@@ -77,6 +78,12 @@ export const Login = () => {
                     {formik.touched.password && formik.errors.password ? (
                         <div className={l.errorMessage}>{formik.errors.password}</div>) : null}
                     <label>Password</label>
+                </div>
+                <div className={l.rememberBox}>
+                    <input type={'checkbox'}
+                           {...formik.getFieldProps('rememberMe')}
+                    />
+                    <label> Remember Me</label>
                 </div>
                 <button type='submit'>
                     Login

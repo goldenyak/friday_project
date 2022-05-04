@@ -11,7 +11,6 @@ import Preloader from "./common/preloader/Preloader";
 
 function App() {
     let dispatch = useDispatch()
-    let isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
     let loadingStatus = useSelector<AppRootStateType, string>((state) => state.app.status)
 
     useEffect(() => {

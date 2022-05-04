@@ -1,5 +1,4 @@
 import {authAPI} from "../api/api";
-import {AppDispatch} from "./store";
 import {Dispatch} from "redux";
 
 
@@ -56,9 +55,8 @@ type ActionsType = ReturnType<typeof setUserData>
     | ReturnType<typeof isLoggedInAC>
 
 
-
 export type LoginParamsType = {
     email: string
     password: string
-    rememberMe?: boolean
+    rememberMe: boolean
 }

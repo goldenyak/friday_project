@@ -17,6 +17,7 @@ type FormikErrorType = {
 export const Login = () => {
 
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+    const errorMessage = useSelector<AppRootStateType, string | null>(state => state.login.error)
 
     const dispatch = useDispatch();
 
@@ -85,11 +86,16 @@ export const Login = () => {
                     />
                     <label> Remember Me</label>
                 </div>
-                <button type='submit'>
-                    Login
-                </button>
+
+                <div>
+                <div className={l.errorBox}>
+                    {errorMessage && <div className={l.errorMessage}>{errorMessage}</div>}
+                </div>
+                <button type='submit'>Login</button>
+
                 <h3>Don’t have an account?</h3>
                 <a href={'/register'}><h4>Sign Up</h4></a>
+                </div>
             </form>
         </div>
     )

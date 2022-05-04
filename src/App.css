@@ -17,3 +17,10 @@ body{
   text-align: center;
 
 }
+
+.preloaderPosition{
+  position: fixed;
+  top: 30%;
+  text-align: center;
+  width: 100%;
+}

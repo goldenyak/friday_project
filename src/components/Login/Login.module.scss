@@ -87,7 +87,7 @@
 .loginBox {
   button {
     display: block;
-    margin: 79px auto 0;
+    margin: 40px auto;
     background-color: #21268F;
     color: #ECECF9;
     border: none;
@@ -101,7 +101,6 @@
 }
 
 .rememberBox{
-  margin-top: 20px;
   align-items: center;
   display: flex;
   justify-content: left;
@@ -115,9 +114,17 @@
   & label {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    margin-left: 20px;
+    margin: 0 20px;
   }
 }
+
+
+.loginBox .errorBox{
+  margin-top: 10px;
+  height: 50px;
+  padding: 20px 0;
+}
+
 
 .loginBox .errorMessage{
   color: red;

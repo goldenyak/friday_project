@@ -9,7 +9,7 @@ import Preloader from "../../common/preloader/Preloader";
 import showPasswordIcon from "../../common/icons/showPasswordIcon.png";
 
 
-export type registerValueTypes = {
+export type registerValueType = {
     email:string,
     password:string,
     confirmPassword?: string
@@ -22,7 +22,7 @@ type FormikErrorType = {
 }
 
 
-const validate = (values:registerValueTypes) => {
+const validate = (values:registerValueType) => {
     const errors: FormikErrorType = {};
 
     if (!values.email) {
@@ -38,7 +38,6 @@ const validate = (values:registerValueTypes) => {
     } else if (values.password.length < 8) {
         errors.password = 'Passwords must be at least 7 characters'
     }
-
 
     if(!values.confirmPassword) {
         errors.confirmPassword = 'Required confirm password';
@@ -65,8 +64,8 @@ export const Register = () => {
     const formik = useFormik( {
         initialValues:  {
             email: '',
-            password: '' ,
-            confirmPassword: ''
+            password: '',
+            confirmPassword: '',
         },
         validate,
         onSubmit: values => {

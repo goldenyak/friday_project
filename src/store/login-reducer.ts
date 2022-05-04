@@ -1,13 +1,18 @@
-import {Dispatch} from "react";
 import {authAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 
 type InitialStateType = {
     isLoggedIn: boolean
+    email:string | null
+    name: string | null
 }
 
 const initialState: InitialStateType = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    email: null,
+    name:null
+
 }
 // reducers
 export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -20,23 +25,19 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
 }
 
 // actions
-export const setIsLoggedInAC = (value: boolean) =>
-    ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+export const setIsLoggedInAC = (value: boolean) => ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+// export const setUserDataAC = (value: ) => ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
 // thunks
-export const loginTC = (params: LoginParamsType) => (dispatch: any) => {
-    authAPI.login(params)
-        .then( (res: any) => {
+export const loginTC = (loginData: LoginParamsType) => (dispatch: Dispatch) => {
+    authAPI.login(loginData)
+        .then( (res) => {
+            console.log(res)
             dispatch(setIsLoggedInAC(true));
+            // dispatch(setUserDataAC(''))
         })
 }
 
-export const logoutTC = () => (dispatch: any) => {
-    authAPI.logout()
-        .then( (res: any) => {
-            dispatch(setIsLoggedInAC(false));
-        })
-}
 
 // types
 type ActionsType = ReturnType<typeof setIsLoggedInAC>

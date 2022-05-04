@@ -22,8 +22,8 @@ export const Login = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: 'sasads1a@mail.ru',
+            password: 'sdas3r2135dfsad',
             rememberMe: false
         },
         validate: (values) => {
@@ -40,8 +40,8 @@ export const Login = () => {
             }
             return errors;
         },
-        onSubmit: params => {
-            dispatch(loginTC(params) as any)
+        onSubmit: loginData => {
+            dispatch(loginTC(loginData) as any)
             formik.resetForm()
         },
     })

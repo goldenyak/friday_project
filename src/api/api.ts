@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios"
 import {LoginParamsType} from "../store/login-reducer";
+import {registerValueType} from "../components/Register/Register";
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
@@ -11,15 +12,18 @@ export const instance = axios.create({
 //api
 export const authAPI = {
     register(email:string, password:string) {
-        return instance.post<AxiosResponse>('auth/register', {email, password})
+        return instance.post<registerValueType,AxiosResponse>('auth/register', {email, password} )
     },
 
-    login(params: LoginParamsType) {
-        return instance.post<LoginParamsType, AxiosResponse<ResponseType>>('/auth/login', params);
+    login(loginData: LoginParamsType) {
+        return instance.post<LoginParamsType, AxiosResponse<ResponseType>>('/auth/login', loginData);
     },
-    logout() {
+    getProfile() {
         return instance.post<ResponseType>('/auth/me', {});
-    }
+    },
+   // changeInfo() {
+   //      return instance.put<ResponseType>('/auth/me', {name:"new name", avatar:"https://s3.envato.com/files/253866565/9270.jpg"});
+   //  }
 
 
 
@@ -41,7 +45,6 @@ export type ResponseType = {
     name: string;
     avatar?: string;
     publicCardPacksCount: number;
-
     created: Date;
     updated: Date;
     isAdmin: boolean;

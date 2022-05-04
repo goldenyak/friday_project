@@ -21,9 +21,9 @@ export const authAPI = {
     getProfile() {
         return instance.post<ResponseType>('/auth/me', {});
     },
-   // changeInfo() {
-   //      return instance.put<ResponseType>('/auth/me', {name:"new name", avatar:"https://s3.envato.com/files/253866565/9270.jpg"});
-   //  }
+   changeProfileInfo(name:string) {
+        return instance.put<ResponseType>('/auth/me', {name});
+    }
 
 
 

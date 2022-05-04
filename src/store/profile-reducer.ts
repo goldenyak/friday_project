@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+
 const initialState = {}
 
 type InitialStateType = typeof initialState
@@ -14,14 +17,12 @@ export const profileReducer = (state: InitialStateType = initialState, action:ac
 
 
 //thunk
-// export const getProfileInfoTC = () => {
-//     return (dispatch: Dispatch) => {
-//         authAPI.getProfile().then((res:AxiosResponse<ResponseType>) => {
-//             let {email, name} = res.data
-//             dispatch(setProfileInfo({email, name}))
-//         })
-//     }
-// }
+export const getProfileInfoTC = (name:string) => {
+    return (dispatch: Dispatch) => {
+        authAPI.changeProfileInfo(name).then((res) => {
+        })
+    }
+}
 
 
 //actions

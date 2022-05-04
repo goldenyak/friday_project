@@ -1,10 +1,11 @@
 import React from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {Navigate} from "react-router-dom";
 import {useFormik} from "formik";
 import l from './Profile.module.scss';
 import onLoadAvatarIcon from '../../common/icons/onLoadAvatar.svg'
+import {getProfileInfoTC} from "../../store/profile-reducer";
 
 
 type profileType = {
@@ -42,6 +43,10 @@ const validate = (values:profileType) => {
 
 export const Profile =() => {
 
+
+    let dispatch = useDispatch()
+
+
     let profileName = useSelector<AppRootStateType, string>(state => state.login.name)
     let profileEmail = useSelector<AppRootStateType, string>(state => state.login.email)
     let getEmailName = profileName!.includes('@') ? profileName!.split('@')[0] : profileName
@@ -56,8 +61,8 @@ export const Profile =() => {
         },
         validate,
         onSubmit: values => {
-            console.log(values)
-            // dispatch(registerTC(values) as any)
+            dispatch( getProfileInfoTC(values.name) as any)
+
         }
     })
 

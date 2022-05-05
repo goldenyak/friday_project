@@ -19,10 +19,10 @@ export const Login = () => {
 
     const formik = useFormik({
         initialValues: {
-            // email: '',
-            // password: '',
-            email: 'onethps@gmail.com',
-            password: 'dwqdqw24142',
+            email: '',
+            password: '',
+            // email: 'onethps@gmail.com',
+            // password: 'dwqdqw24142',
             rememberMe: false
         },
         validate: loginValidation,
@@ -55,7 +55,7 @@ export const Login = () => {
                 />
 
                 <CustomInput
-                    type={"password"}
+                    password
                     label={'Password'} {...formik.getFieldProps('password')}
                     error={formik.touched.password && formik.errors.password ? formik.errors.password : ''}
                 />

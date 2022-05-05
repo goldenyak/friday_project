@@ -66,13 +66,13 @@ export const Register = () => {
                 />
 
                 <CustomInput
-                    type={"password"}
+                    password
                     label={'Password'} {...formik.getFieldProps('password')}
                     error={formik.touched.password && formik.errors.password ? formik.errors.password : ''}
                 />
 
                 <CustomInput
-                    type={"password"}
+                    password
                     label={'Confirm Password'} {...formik.getFieldProps('confirmPassword')}
                     error={formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ''}
                 />

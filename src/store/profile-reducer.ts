@@ -1,15 +1,19 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
-import {setUserData} from "./login-reducer";
+import {isLoggedInAC} from "./login-reducer";
 
-const initialState = {}
+const initialState = {
+    email: '',
+    name:'',
+    error: null,
+}
 
 type InitialStateType = typeof initialState
 
 export const profileReducer = (state: InitialStateType = initialState, action:actionTypeProfileReducer) => {
     switch (action.type) {
         case "profile/SET-PROFILE-INFO":
-            return {...state, ...action.payload}
+            return {...state, name: action.name, email: action.email}
         default:
             return state
     }
@@ -18,9 +22,10 @@ export const profileReducer = (state: InitialStateType = initialState, action:ac
 
 
 //thunk
-export const getProfileInfoTC = (name:string) => {
+export const changeProfileInfoTC = (name:string) => {
     return (dispatch: Dispatch) => {
-        authAPI.changeProfileInfo(name).then((res) => {
+        authAPI.changeProfileInfo(name).then(() => {
+
         })
     }
 }
@@ -29,14 +34,20 @@ export const getProfileInfoTC = (name:string) => {
 export const logoutTC = () => {
     return (dispatch: Dispatch) => {
         authAPI.logout().then((res) => {
-           dispatch(setUserData(false, '', ''))
+            dispatch(setProfileInfo( '', ''))
+            dispatch(isLoggedInAC(false))
         })
     }
 }
 
 
 //actions
-const setProfileInfo = (payload:any) => {return {type: 'profile/SET-PROFILE-INFO', payload} as const}
+export const setProfileInfo = (email:string, name:string) => {
+    return {
+        type: 'profile/SET-PROFILE-INFO',
+        email, name
+    } as const
+}
 
 
 //types

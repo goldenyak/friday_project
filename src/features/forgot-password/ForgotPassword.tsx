@@ -6,6 +6,7 @@ import {NavLink} from "react-router-dom";
 import {forgotPasswordTC} from "../../store/forgot-password-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
+import CustomInput from "../../common/CustomInput/CustomInput";
 
 const ForgotPassword = () => {
     let dispatch = useDispatch()
@@ -15,7 +16,6 @@ const ForgotPassword = () => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            // email: 'onethps@gmail.com',
         },
         validate: forgotPageValidation,
         onSubmit: values => {
@@ -30,12 +30,10 @@ const ForgotPassword = () => {
             <h2>Forgot your password?</h2>
             <form onSubmit={formik.handleSubmit}>
 
-                <div className={l.userBox}>
-                    <input required={true}{...formik.getFieldProps('email')}/>
-                    {formik.touched.email && formik.errors.email ?
-                        <div className={l.errorMessage}>{formik.errors.email}</div> : null}
-                    <label>Email</label>
-                </div>
+                <CustomInput
+                    label={'Email'} {...formik.getFieldProps('email')}
+                    error={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
+                />
 
                 <h3>Enter your email address and we will send you further instructions </h3>
 

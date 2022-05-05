@@ -1,28 +1,29 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Navigate, NavLink} from 'react-router-dom';
 import l from "./Login.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
-import {AppRootStateType} from "../../store/store";
+import {AppDispatch, AppRootStateType} from "../../store/store";
 import {loginTC} from "../../store/login-reducer";
 import Preloader from "../../common/preloader/Preloader";
 import {loginValidation} from "../../validators/validators";
 import CustomInput from "../../common/CustomInput/CustomInput";
+import {RequestStatusType} from "../../store/app-reducer";
 
 export const Login = () => {
 
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const errorMessage = useSelector<AppRootStateType, string | null>(state => state.login.error)
-    const isFetchingStatus = useSelector<AppRootStateType, boolean>(state => state.login.isFetching)
+    const loadingStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.login.loadingStatus)
 
     const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
-            // email: 'onethps@gmail.com',
-            // password: 'dwqdqw24142',
+            // email: '',
+            // password: '',
+            email: 'onethps@gmail.com',
+            password: 'dwqdqw24142',
             rememberMe: false
         },
         validate: loginValidation,
@@ -31,12 +32,6 @@ export const Login = () => {
             formik.resetForm()
         },
     })
-
-    const[showPassword, setShowPassword] = useState<boolean>(false)
-
-    const onShowPassword = () => {
-        setShowPassword(!showPassword)
-    }
 
     if (isLoggedIn) {
         return <Navigate to='/profile'/>
@@ -74,7 +69,8 @@ export const Login = () => {
                 </div>
 
 
-                {isFetchingStatus ? <div className={l.loginButtonBox}>
+                {loadingStatus === 'loading' ? <div className={l.preloaderBox}> <Preloader/></div> :
+                    <div className={l.loginButtonBox}>
                         <div className={l.errorBox}>
                             {errorMessage && <div className={l.errorMessage}>{errorMessage}</div>}
                         </div>
@@ -83,9 +79,7 @@ export const Login = () => {
                         <h3>Don’t have an account?</h3>
                         <h4><NavLink to={'/register'}>Sign Up</NavLink></h4>
                     </div>
-                    :
-
-                    <div className={l.preloaderBox}> <Preloader/></div>}
+                }
             </form>
         </div>
     )

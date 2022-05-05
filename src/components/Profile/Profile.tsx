@@ -5,7 +5,7 @@ import {Navigate} from "react-router-dom";
 import {useFormik} from "formik";
 import l from './Profile.module.scss';
 import onLoadAvatarIcon from '../../common/icons/onLoadAvatar.svg'
-import {getProfileInfoTC, logoutTC} from "../../store/profile-reducer";
+import {changeProfileInfoTC, logoutTC} from "../../store/profile-reducer";
 import Header from '../Header/Header';
 import {profileValidate} from "../../validators/validators";
 import CustomInput from '../../common/CustomInput/CustomInput';
@@ -13,16 +13,12 @@ import CustomInput from '../../common/CustomInput/CustomInput';
 
 export const Profile =() => {
 
-    let dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-    let profileName = useSelector<AppRootStateType, string>(state => state.login.name)
-    let profileEmail = useSelector<AppRootStateType, string>(state => state.login.email)
+    let profileName = useSelector<AppRootStateType, string>(state => state.profile.name)
+    let profileEmail = useSelector<AppRootStateType, string>(state => state.profile.email)
     let getEmailName = profileName!.includes('@') ? profileName!.split('@')[0] : profileName
-    let isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
-
-    const onLogoutHandler = () => {
-        dispatch(logoutTC() as any)
-    }
+    // let isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
     const formik = useFormik( {
         initialValues:  {
@@ -31,19 +27,18 @@ export const Profile =() => {
         },
         validate: profileValidate,
         onSubmit: values => {
-            dispatch( getProfileInfoTC(values.name) as any)
-
+            dispatch( changeProfileInfoTC(values.name) as any)
         }
     })
 
-
-
-    if (!isLoggedIn) {
-        return <Navigate to={'/'}/>
+    const onLogoutHandler = () => {
+        dispatch(logoutTC() as any)
     }
 
 
-
+    if (!profileName) {
+        return <Navigate to={'/'}/>
+    }
 
     return (
         <>
@@ -61,7 +56,7 @@ export const Profile =() => {
 
                     <CustomInput
                         label={'Name'} {...formik.getFieldProps('name')}
-                                 error={formik.touched.name && formik.errors.name ? formik.errors.name : ''}/>
+                        error={formik.touched.name && formik.errors.name ? formik.errors.name : ''}/>
 
                     <CustomInput label={'Email'} {...formik.getFieldProps('email')}
                                  error={formik.touched.email && formik.errors.email ? formik.errors.email : ''}/>

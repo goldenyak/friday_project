@@ -8,10 +8,7 @@ import onLoadAvatarIcon from '../../common/icons/onLoadAvatar.svg'
 import {getProfileInfoTC, logoutTC} from "../../store/profile-reducer";
 import Header from '../Header/Header';
 import {profileValidate} from "../../validators/validators";
-
-
-
-
+import CustomInput from '../../common/CustomInput/CustomInput';
 
 
 export const Profile =() => {
@@ -23,7 +20,7 @@ export const Profile =() => {
     let getEmailName = profileName!.includes('@') ? profileName!.split('@')[0] : profileName
     let isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
-     const onLogoutHandler = () => {
+    const onLogoutHandler = () => {
         dispatch(logoutTC() as any)
     }
 
@@ -62,19 +59,13 @@ export const Profile =() => {
 
                 <form onSubmit={formik.handleSubmit}>
 
-                    <div className={l.userBox}>
-                        <input required={true} {...formik.getFieldProps('name')}/>
-                        {formik.touched.name && formik.errors.name &&
-                            <div className={l.errorMessage}>{formik.errors.name}</div>}
-                        <label>Name</label>
-                    </div>
 
-                    <div className={l.userBox}>
-                        <input required={true} {...formik.getFieldProps('email')}/>
-                        {formik.touched.email && formik.errors.email &&
-                            <div className={l.errorMessage}>{formik.errors.email}</div>}
-                        <label>Email</label>
-                    </div>
+                    <CustomInput label={'Name'} {...formik.getFieldProps('name')}
+                                 error={formik.touched.name && formik.errors.name ? formik.errors.name : ''}/>
+
+
+                    <CustomInput label={'Email'} {...formik.getFieldProps('email')}
+                                 error={formik.touched.email && formik.errors.email ? formik.errors.email : ''}/>
 
                     <div className={l.buttonBlock}>
                         <a onClick={onLogoutHandler}  className={l.backToLoginLink}>Log Out</a>

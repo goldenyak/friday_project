@@ -21,7 +21,6 @@ export const profileReducer = (state: InitialStateType = initialState, action:ac
 export const getProfileInfoTC = (name:string) => {
     return (dispatch: Dispatch) => {
         authAPI.changeProfileInfo(name).then((res) => {
-            console.log(res)
         })
     }
 }

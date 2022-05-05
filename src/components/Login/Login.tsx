@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Navigate} from 'react-router-dom';
+import {Navigate, NavLink} from 'react-router-dom';
 import l from "./Login.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
@@ -21,8 +21,8 @@ export const Login = () => {
         initialValues: {
             // email: '',
             // password: '',
-            email: 'sasads1a@mail.ru',
-            password: 'sdas3r2135dfsad',
+            email: 'onethps@gmail.com',
+            password: 'dwqdqw24142',
             rememberMe: false
         },
         validate: loginValidation,
@@ -65,11 +65,15 @@ export const Login = () => {
                     <label>Password</label>
                 </div>
 
+                <div className={l.forgotPassword}>
+                    <NavLink to={'/forgot'} >Forgot Password</NavLink>
+                </div>
+
                 <div className={l.rememberBox}>
                     <input type={'checkbox'}
                            {...formik.getFieldProps('rememberMe')}
                     />
-                    <label> Remember Me</label>
+                    <label>Remember Me</label>
                 </div>
 
 
@@ -80,7 +84,7 @@ export const Login = () => {
                         <button type='submit'>Login</button>
 
                         <h3>Don’t have an account?</h3>
-                        <a href={'/register'}><h4>Sign Up</h4></a>
+                    <h4><NavLink to={'/register'}>Sign Up</NavLink></h4>
                     </div>
                     :
 

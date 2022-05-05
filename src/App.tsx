@@ -9,6 +9,7 @@ import {initializeAppTC} from "./store/app-reducer";
 import {AppRootStateType} from "./store/store";
 import Preloader from "./common/preloader/Preloader";
 import PackList from "./components/PackLisst/PackList";
+import ForgotPassword from "./features/forgot-password/ForgotPassword";
 
 function App() {
     let dispatch = useDispatch()
@@ -34,6 +35,7 @@ function App() {
                 <Route path='/profile' element={<Profile/>}/>
                 <Route path={'/login'} element={<Login/>}/>
                 <Route path={'/packlist'} element={<PackList/>}/>
+                <Route path={'/forgot'} element={<ForgotPassword/>}/>
                 <Route path={'/'} element={<Navigate to={'/login'}/>}/>
             </Routes>
         </div>

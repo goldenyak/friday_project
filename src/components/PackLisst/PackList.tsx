@@ -1,9 +1,16 @@
 import React from 'react';
+import Header from "../Header/Header";
 
 const PackList = () => {
     return (
+
         <div>
-            PackList PAGE
+            <nav>
+                <Header/>
+            </nav>
+            <div>
+                PackList PAGE
+            </div>
         </div>
     );
 };

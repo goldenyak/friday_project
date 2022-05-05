@@ -3,6 +3,7 @@ import l from './Header.module.scss'
 import {NavLink} from "react-router-dom";
 import profileIcon from '../../common/icons/headerIcons/profileIcon.svg'
 import packListIcon from '../../common/icons/headerIcons/packListIcon.svg'
+
 const Header = () => {
     return (
         <header className={l.headerBox}>
@@ -16,9 +17,9 @@ const Header = () => {
                          className={({ isActive }) => (isActive ? l.active : l.inactive)}>
                     <img className={l.iconStyle} src={packListIcon}/>Pack List</NavLink>
 
-            <NavLink to="/profile"
-                     className={({ isActive }) => (isActive ? l.active : l.inactive)}>
-                <img src={profileIcon}/>Profile</NavLink>
+                <NavLink to="/profile"
+                         className={({ isActive }) => (isActive ? l.active : l.inactive)}>
+                    <img src={profileIcon}/>Profile</NavLink>
 
 
 

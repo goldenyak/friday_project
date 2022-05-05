@@ -21,8 +21,11 @@ export const authAPI = {
     getProfile() {
         return instance.post<ResponseType>('/auth/me', {});
     },
-   changeProfileInfo(name:string) {
+    changeProfileInfo(name:string) {
         return instance.put<ResponseType>('/auth/me', {name});
+    },
+    logout() {
+        return instance.delete('/auth/me', {})
     }
 
 

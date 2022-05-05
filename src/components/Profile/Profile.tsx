@@ -5,7 +5,7 @@ import {Navigate} from "react-router-dom";
 import {useFormik} from "formik";
 import l from './Profile.module.scss';
 import onLoadAvatarIcon from '../../common/icons/onLoadAvatar.svg'
-import {getProfileInfoTC} from "../../store/profile-reducer";
+import {getProfileInfoTC, logoutTC} from "../../store/profile-reducer";
 import Header from '../Header/Header';
 
 
@@ -53,7 +53,9 @@ export const Profile =() => {
     let getEmailName = profileName!.includes('@') ? profileName!.split('@')[0] : profileName
     let isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
-
+     const onLogoutHandler = () => {
+        dispatch(logoutTC() as any)
+    }
 
     const formik = useFormik( {
         initialValues:  {
@@ -72,6 +74,8 @@ export const Profile =() => {
     if (!isLoggedIn) {
         return <Navigate to={'/'}/>
     }
+
+
 
 
     return (
@@ -103,7 +107,7 @@ export const Profile =() => {
                     </div>
 
                     <div className={l.buttonBlock}>
-                        <a  className={l.backToLoginLink}>Cancel</a>
+                        <a onClick={onLogoutHandler}  className={l.backToLoginLink}>Log Out</a>
                         <button className={l.submitButton} type="submit">Save</button>
                     </div>
 

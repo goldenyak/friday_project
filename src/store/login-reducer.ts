@@ -63,7 +63,7 @@ export const loginTC = (loginData: LoginParamsType) => {
             }).catch((error:AxiosError<ResponseError>) => {
             dispatch(errorLoginMessage(error.response?.data ? error.response.data.error: error.message))
         }).finally( () => {
-            dispatch(isFetchingStatus(true))
+                dispatch(isFetchingStatus(true))
             }
 
         )

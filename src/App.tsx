@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {initializeAppTC} from "./store/app-reducer";
 import {AppRootStateType} from "./store/store";
 import Preloader from "./common/preloader/Preloader";
+import PackList from "./components/PackLisst/PackList";
 
 function App() {
     let dispatch = useDispatch()
@@ -32,6 +33,7 @@ function App() {
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/profile' element={<Profile/>}/>
                 <Route path={'/login'} element={<Login/>}/>
+                <Route path={'/packlist'} element={<PackList/>}/>
                 <Route path={'/'} element={<Navigate to={'/login'}/>}/>
             </Routes>
         </div>

@@ -1,6 +1,5 @@
 import axios, {AxiosResponse} from "axios"
 import {LoginParamsType} from "../store/login-reducer";
-import {registerValueType} from "../components/Register/Register";
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
@@ -12,7 +11,7 @@ export const instance = axios.create({
 //api
 export const authAPI = {
     register(email:string, password:string) {
-        return instance.post<registerValueType,AxiosResponse>('auth/register', {email, password} )
+        return instance.post<AxiosResponse>('auth/register', {email, password} )
     },
 
     login(loginData: LoginParamsType) {

@@ -1,7 +1,6 @@
 import {authAPI, RESPONSE_TYPE, ResponseError} from "../api/api";
 import {AxiosError} from "axios";
 import {AppDispatch} from "./store";
-import {registerValueType} from "../components/Register/Register";
 
 
 const initialState = {
@@ -41,7 +40,7 @@ const isFetchingLoader = (loading:boolean) => {return {type: 'register/IS-FETCHI
 
 
 //thunk
-export const registerTC = ({email, password}:registerValueType) => {
+export const registerTC = (email:string, password:string) => {
     return   (dispatch: AppDispatch) => {
         // clean past errors and turn on preloader
         dispatch(getErrorMessage(''))

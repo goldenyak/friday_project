@@ -7,46 +7,16 @@ import l from './Profile.module.scss';
 import onLoadAvatarIcon from '../../common/icons/onLoadAvatar.svg'
 import {getProfileInfoTC, logoutTC} from "../../store/profile-reducer";
 import Header from '../Header/Header';
+import {profileValidate} from "../../validators/validators";
 
 
-type profileType = {
-    email:string,
-    name:string,
-}
-
-type FormikErrorType = {
-    email?:string,
-    name?:string,
-}
-
-const validate = (values:profileType) => {
-    const errors: FormikErrorType = {};
-
-    if (!values.email) {
-        errors.email = 'Required email';
-    } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-    ) {
-        errors.email = 'Invalid email address';
-    }
-
-    if (!values.name) {
-        errors.name = 'Required name';
-    }
-
-
-    return errors;
-
-}
 
 
 
 
 export const Profile =() => {
 
-
     let dispatch = useDispatch()
-
 
     let profileName = useSelector<AppRootStateType, string>(state => state.login.name)
     let profileEmail = useSelector<AppRootStateType, string>(state => state.login.email)
@@ -62,7 +32,7 @@ export const Profile =() => {
             email: profileEmail,
             name:getEmailName,
         },
-        validate,
+        validate: profileValidate,
         onSubmit: values => {
             dispatch( getProfileInfoTC(values.name) as any)
 

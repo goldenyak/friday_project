@@ -7,13 +7,7 @@ import {AppRootStateType} from "../../store/store";
 import {loginTC} from "../../store/login-reducer";
 import showPasswordIcon from "../../common/icons/eye.svg";
 import Preloader from "../../common/preloader/Preloader";
-
-
-type FormikErrorType = {
-    email?: string
-    password?: string
-    rememberMe?: boolean
-}
+import {loginValidation} from "../../validators/validators";
 
 export const Login = () => {
 
@@ -31,20 +25,7 @@ export const Login = () => {
             password: 'sdas3r2135dfsad',
             rememberMe: false
         },
-
-        validate: (values) => {
-            const errors: FormikErrorType = {};
-            if (!values.email) {
-                errors.email = 'Required';
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address';
-            }
-            if (!values.password) {
-                errors.password = 'Required password';
-            }
-
-            return errors;
-        },
+        validate: loginValidation,
         onSubmit: loginData => {
             dispatch(loginTC(loginData) as any)
             formik.resetForm()
@@ -52,8 +33,6 @@ export const Login = () => {
     })
 
     const[showPassword, setShowPassword] = useState<boolean>(false)
-
-    const showIconStyle = showPassword? '' : ''
 
     const onShowPassword = () => {
         setShowPassword(!showPassword)
@@ -85,9 +64,6 @@ export const Login = () => {
                         <div className={l.errorMessage}>{formik.errors.password}</div>) : null}
                     <label>Password</label>
                 </div>
-
-Ь
-
 
                 <div className={l.rememberBox}>
                     <input type={'checkbox'}

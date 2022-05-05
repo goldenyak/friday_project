@@ -59,10 +59,9 @@ export const Profile =() => {
 
                 <form onSubmit={formik.handleSubmit}>
 
-
-                    <CustomInput label={'Name'} {...formik.getFieldProps('name')}
+                    <CustomInput
+                        label={'Name'} {...formik.getFieldProps('name')}
                                  error={formik.touched.name && formik.errors.name ? formik.errors.name : ''}/>
-
 
                     <CustomInput label={'Email'} {...formik.getFieldProps('email')}
                                  error={formik.touched.email && formik.errors.email ? formik.errors.email : ''}/>

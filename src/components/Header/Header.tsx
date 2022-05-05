@@ -22,7 +22,6 @@ const Header = () => {
                     <img src={profileIcon}/>Profile</NavLink>
 
 
-
             </nav>
 
         </header>

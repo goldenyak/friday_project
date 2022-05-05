@@ -46,49 +46,6 @@
   opacity: 0.8;
 }
 
-.loginBox .userBox {
-  position: relative;
-  height: 70px;
-  margin: 24px auto 0;
-}
-
-.loginBox .userBox input {
-  width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
-  color: #2D2E46;
-  margin-bottom: 10px;
-  border: none;
-  border-bottom: 1px solid #2D2E46;
-  outline: none;
-  background: transparent;
-}
-
-.loginBox .userBox img {
-  position: absolute;
-  right: 5%;
-  bottom: 60%;
-}
-
-.loginBox .userBox label {
-  font-family: Poppins, sans-serif;
-  position: absolute;
-  top:0;
-  left: 0;
-  padding: 10px 0;
-  font-size: 16px;
-  color: #2D2E46;
-  pointer-events: none;
-  transition: .5s;
-}
-
-.loginBox .userBox input:focus ~ label,
-.loginBox .userBox input:valid ~ label {
-  top: -20px;
-  left: 0;
-  color: grey;
-  font-size: 12px;
-}
 
 .loginBox a {
   font-family: Poppins, sans-serif;

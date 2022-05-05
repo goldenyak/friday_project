@@ -8,6 +8,7 @@ import {registerTC} from "../../store/register-reducer";
 import Preloader from "../../common/preloader/Preloader";
 import showPasswordIcon from "../../common/icons/eye.svg";
 import {RegisterValidate} from "../../validators/validators";
+import CustomInput from "../../common/CustomInput/CustomInput";
 
 
 
@@ -59,27 +60,24 @@ export const Register = () => {
 
             <form onSubmit={formik.handleSubmit}>
 
-                <div className={l.userBox}>
-                    <input required={true} {...formik.getFieldProps('email')}/>
-                    {formik.touched.email && formik.errors.email &&
-                        <div className={l.errorMessage}>{formik.errors.email}</div>}
-                    <label>Email</label>
-                </div>
+                <CustomInput
+                    label={'Email'} {...formik.getFieldProps('email')}
+                    error={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
+                />
 
-                <div className={l.userBox}>
-                    <input required={true} type={showPassword ? "text" : "password"} {...formik.getFieldProps('password')}/>
-                    <img alt={'showPasswordIcon'} onClick={onShowPassword} src={showPasswordIcon}/>
-                    {formik.touched.password && formik.errors.password && <div className={l.errorMessage}>{formik.errors.password}</div>}
-                    <label>Password</label>
-                </div>
+                <CustomInput
+                    type={"password"}
+                    label={'Password'} {...formik.getFieldProps('password')}
+                    error={formik.touched.password && formik.errors.password ? formik.errors.password : ''}
+                />
+
+                <CustomInput
+                    type={"password"}
+                    label={'Confirm Password'} {...formik.getFieldProps('confirmPassword')}
+                    error={formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ''}
+                />
 
 
-                <div className={l.userBox}>
-                    <input required={true}  type={showConfirmPassword ? "text" : "password"} {...formik.getFieldProps('confirmPassword')}/>
-                    <img alt={'showPasswordIcon'} onClick={onShowConfirmPassword} src={showPasswordIcon}/>
-                    {formik.touched.confirmPassword && formik.errors.confirmPassword && <div className={l.errorMessage}>{formik.errors.confirmPassword}</div>}
-                    <label>Confirm Password</label>
-                </div>
 
                 {isFetchingLoader ? <Preloader/> :
                     <div className={l.buttonBlock}>

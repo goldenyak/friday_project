@@ -5,9 +5,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {AppRootStateType} from "../../store/store";
 import {loginTC} from "../../store/login-reducer";
-import showPasswordIcon from "../../common/icons/eye.svg";
 import Preloader from "../../common/preloader/Preloader";
 import {loginValidation} from "../../validators/validators";
+import CustomInput from "../../common/CustomInput/CustomInput";
 
 export const Login = () => {
 
@@ -48,22 +48,19 @@ export const Login = () => {
             <h2>Sign In</h2>
             <form onSubmit={formik.handleSubmit}>
 
-                <div className={l.userBox}>
-                    <input required={true}{...formik.getFieldProps('email')}/>
-                    {formik.touched.email && formik.errors.email ?
-                        <div className={l.errorMessage}>{formik.errors.email}</div> : null}
-                    <label>Username</label>
-                </div>
 
-                <div className={l.userBox}>
-                    <input required={true} type={showPassword ? "text" : "password"}
-                           {...formik.getFieldProps('password')}/>
-                    <img alt={'showPasswordIcon'} onClick={onShowPassword}
-                         src={showPasswordIcon}/>
-                    {formik.touched.password && formik.errors.password ? (
-                        <div className={l.errorMessage}>{formik.errors.password}</div>) : null}
-                    <label>Password</label>
-                </div>
+                <CustomInput
+                    label={'Email'} {...formik.getFieldProps('email')}
+                    error={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
+                />
+
+                <CustomInput
+                    type={"password"}
+                    label={'Password'} {...formik.getFieldProps('password')}
+                    error={formik.touched.password && formik.errors.password ? formik.errors.password : ''}
+                />
+
+
 
                 <div className={l.forgotPassword}>
                     <NavLink to={'/forgot'} >Forgot Password</NavLink>
@@ -84,7 +81,7 @@ export const Login = () => {
                         <button type='submit'>Login</button>
 
                         <h3>Don’t have an account?</h3>
-                    <h4><NavLink to={'/register'}>Sign Up</NavLink></h4>
+                        <h4><NavLink to={'/register'}>Sign Up</NavLink></h4>
                     </div>
                     :
 

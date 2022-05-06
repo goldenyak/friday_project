@@ -11,14 +11,17 @@ import Preloader from "./common/preloader/Preloader";
 import PackList from "./components/PackLisst/PackList";
 import ForgotPassword from "./features/forgot-password/ForgotPassword";
 
-const App = React.memo(() => {
+
+
+
+const App = () => {
     let loadingStatus = useSelector<AppRootStateType, string>((state) => state.app.status)
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(initializeAppTC() as any)
-    }, [])
+    }, [dispatch])
 
 
 
@@ -42,6 +45,6 @@ const App = React.memo(() => {
             </Routes>
         </div>
     );
-})
+}
 
 export default App;

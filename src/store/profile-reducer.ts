@@ -22,14 +22,13 @@ export const profileReducer = (state: InitialStateType = initialState, action:ac
 
 
 //thunk
+
 export const changeProfileInfoTC = (name:string) => {
     return (dispatch: Dispatch) => {
         authAPI.changeProfileInfo(name).then(() => {
-
         })
     }
 }
-
 
 export const logoutTC = () => {
     return (dispatch: Dispatch) => {

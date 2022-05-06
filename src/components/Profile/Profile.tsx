@@ -15,10 +15,11 @@ export const Profile =() => {
 
     const dispatch = useDispatch()
 
+    let isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     let profileName = useSelector<AppRootStateType, string>(state => state.profile.name)
     let profileEmail = useSelector<AppRootStateType, string>(state => state.profile.email)
     let getEmailName = profileName!.includes('@') ? profileName!.split('@')[0] : profileName
-    // let isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+
 
     const formik = useFormik( {
         initialValues:  {
@@ -36,7 +37,7 @@ export const Profile =() => {
     }
 
 
-    if (!profileName) {
+    if (!isLoggedIn) {
         return <Navigate to={'/'}/>
     }
 

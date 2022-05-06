@@ -10,9 +10,10 @@ import {AppRootStateType} from "./store/store";
 import PackList from "./components/PackLisst/PackList";
 import ForgotPassword from "./features/forgot-password/ForgotPassword";
 import Preloader from "./common/preloader/Preloader";
+import {authAPI} from "./api/api";
 
 
-const App = memo(() => {
+const App = () => {
 
     let loadingStatus = useSelector<AppRootStateType, string>((state) => state.app.status)
 
@@ -20,7 +21,7 @@ const App = memo(() => {
 
     useEffect(() => {
         dispatch(initializeAppTC() as any)
-    }, [dispatch])
+    }, [])
 
 
 
@@ -44,6 +45,6 @@ const App = memo(() => {
             </Routes>
         </div>
     );
-})
+}
 
 export default App;

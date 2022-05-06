@@ -3,10 +3,10 @@ import l from './ForgotPassword.module.scss'
 import {useFormik} from "formik";
 import {forgotPageValidation} from "../../validators/validators";
 import {NavLink} from "react-router-dom";
-import {forgotPasswordTC} from "../../store/forgot-password-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import CustomInput from "../../common/CustomInput/CustomInput";
+import {forgotPasswordTC} from "../../store/forgot-password-reducer";
 
 const ForgotPassword = () => {
     let dispatch = useDispatch()

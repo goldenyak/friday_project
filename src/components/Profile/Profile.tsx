@@ -17,6 +17,8 @@ export const Profile = memo(() => {
     let isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     let profileName = useSelector<AppRootStateType, string>(state => state.profile.name)
     let profileEmail = useSelector<AppRootStateType, string>(state => state.profile.email)
+
+    //takes name from email
     let getEmailName = profileName!.includes('@') ? profileName!.split('@')[0] : profileName
 
 
@@ -27,7 +29,7 @@ export const Profile = memo(() => {
         },
         validate: profileValidate,
         onSubmit: values => {
-            dispatch( changeProfileInfoTC(values.name) as any)
+            dispatch(changeProfileInfoTC(values.name) as any)
         }
     })
 
@@ -40,37 +42,35 @@ export const Profile = memo(() => {
         return <Navigate to={'/'}/>
     }
 
-    return (
-        <>
-            <Header/>
+    return <>
+        <Header/>
 
-            <div className={l.loginBox}>
-                <h2> Personal information</h2>
-                <div className={l.avatarBlock}>
-                    <img className={l.avatar}
-                         src={'https://i.pinimg.com/originals/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.png'}/>
-                    <img className={l.loadAvatar} alt={'loadAvatarIcon'} src={onLoadAvatarIcon} />
+        <div className={l.loginBox}>
+            <h2> Personal information</h2>
+            <div className={l.avatarBlock}>
+                <img className={l.avatar}
+                     src={'https://i.pinimg.com/originals/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.png'}/>
+                <img className={l.loadAvatar} alt={'loadAvatarIcon'} src={onLoadAvatarIcon} />
+            </div>
+
+            <form onSubmit={formik.handleSubmit}>
+
+                <CustomInput
+                    label={'Name'} {...formik.getFieldProps('name')}
+                    error={formik.touched.name && formik.errors.name ? formik.errors.name : ''}/>
+
+                <CustomInput label={'Email'} {...formik.getFieldProps('email')}
+                             error={formik.touched.email && formik.errors.email ? formik.errors.email : ''}/>
+
+                <div className={l.buttonBlock}>
+                    <a onClick={onLogoutHandler}  className={l.backToLoginLink}>Log Out</a>
+                    <button className={l.submitButton} type="submit">Save</button>
                 </div>
 
-                <form onSubmit={formik.handleSubmit}>
 
-                    <CustomInput
-                        label={'Name'} {...formik.getFieldProps('name')}
-                        error={formik.touched.name && formik.errors.name ? formik.errors.name : ''}/>
-
-                    <CustomInput label={'Email'} {...formik.getFieldProps('email')}
-                                 error={formik.touched.email && formik.errors.email ? formik.errors.email : ''}/>
-
-                    <div className={l.buttonBlock}>
-                        <a onClick={onLogoutHandler}  className={l.backToLoginLink}>Log Out</a>
-                        <button className={l.submitButton} type="submit">Save</button>
-                    </div>
+            </form>
 
 
-                </form>
-
-
-            </div>
-        </>
-    );
+        </div>
+    </>
 })

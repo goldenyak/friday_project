@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios"
 import {LoginParamsType} from "../store/login-reducer";
+import {forgotPasswordTC} from "../store/forgot-password-reducer";
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
@@ -26,21 +27,18 @@ export const authAPI = {
     logout() {
         return instance.delete('/auth/me', {})
     },
-    forgotPassword(email:string) {
-        return instance.post('/auth/forgot',{
-                email: email, // кому восстанавливать пароль
-                from: "test-front-admin <ai73a@yandex.by>",
-                // можно указать разработчика фронта)
-                message: `
-<div style="background-color: lime; padding: 15px">password recovery link: 
-<a href='http://localhost:3000/#/set-new-password/$token$'>
-link</a>
-</div>` // хтмп-письмо, вместо $token$ бэк вставит токен
-            }
-        )
+    forgotPassword(email: string) {
+        return instance.post('auth/forgot',
+            {
+                email: email,
+                from: 'onethps@yandex.ru',
+                message: `<div style="background-color: #FFC300; padding: 30px; border-radius: 20px">
+										<p>Please, click on the link and enter a new password</p>
+										<a href='http://localhost:3000/#/set-new-password/$token$'>Go to recovery password</a>
+									</div>
+									`
+            })
     }
-
-
 
 
 }

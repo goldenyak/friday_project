@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <header className={l.headerBox}>
             <div>
-                <h2>It Incubator</h2>
+                <h2 className={l.logo}>It Incubator</h2>
             </div>
 
             <nav className={l.nav}>

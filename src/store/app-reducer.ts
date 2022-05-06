@@ -1,8 +1,10 @@
 import {Dispatch} from "redux";
+import { setProfileInfo} from "./profile-reducer";
+import {AppRootStateType} from "./store";
+import {ThunkAction} from "redux-thunk";
 import {authAPI, ResponseError} from "../api/api";
-import {AxiosError} from "axios";
 import {isLoggedInAC} from "./login-reducer";
-import {setProfileInfo} from "./profile-reducer";
+import {AxiosError} from "axios";
 
 const initialState = {
     isInitializedApp: false,
@@ -32,7 +34,17 @@ export const appReducer = (state: InitialStateType = initialState, action:appRed
 
 
 //thunk
-export const initializeAppTC = () => (dispatch:Dispatch) => {
+export const initializeAppTC = ():ThunkType => (dispatch:Dispatch<appReducerTypes>) => {
+
+    // new Promise((resolve) => {
+    //     resolve(dispatch(authMe()))
+    // }).then(() => {
+    //     dispatch(isInitializedApp(true))
+    //
+    // }).finally(() => {
+    //     dispatch(setAppStatus('succeeded'))
+    // })
+
     authAPI.getProfile().then((resolve) => {
         dispatch(setAppStatus('idle'))
         dispatch(isInitializedApp(true))
@@ -47,6 +59,8 @@ export const initializeAppTC = () => (dispatch:Dispatch) => {
     })
 
 }
+
+
 
 //actions
 
@@ -63,3 +77,9 @@ export type appReducerTypes =
     | ReturnType<typeof setAppStatus>
     | ReturnType<typeof setAppErrorAC>
     | ReturnType<typeof isInitializedApp>
+    |any
+
+
+
+
+type ThunkType = ThunkAction<void, AppRootStateType, Dispatch<appReducerTypes>, appReducerTypes>

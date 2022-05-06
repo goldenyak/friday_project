@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect} from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import './App.css';
 import {Login} from './components/Login/Login';
@@ -7,14 +7,13 @@ import {Register} from './components/Register/Register';
 import {useDispatch, useSelector} from "react-redux";
 import {initializeAppTC} from "./store/app-reducer";
 import {AppRootStateType} from "./store/store";
-import Preloader from "./common/preloader/Preloader";
 import PackList from "./components/PackLisst/PackList";
 import ForgotPassword from "./features/forgot-password/ForgotPassword";
+import Preloader from "./common/preloader/Preloader";
 
 
+const App = memo(() => {
 
-
-const App = () => {
     let loadingStatus = useSelector<AppRootStateType, string>((state) => state.app.status)
 
     const dispatch = useDispatch();
@@ -45,6 +44,6 @@ const App = () => {
             </Routes>
         </div>
     );
-}
+})
 
 export default App;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {Navigate} from "react-router-dom";
@@ -11,8 +11,7 @@ import {profileValidate} from "../../validators/validators";
 import CustomInput from '../../common/CustomInput/CustomInput';
 
 
-export const Profile =() => {
-
+export const Profile = memo(() => {
     const dispatch = useDispatch()
 
     let isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
@@ -74,4 +73,4 @@ export const Profile =() => {
             </div>
         </>
     );
-}
+})
